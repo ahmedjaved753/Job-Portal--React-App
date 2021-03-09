@@ -1,0 +1,18 @@
+@import '../../global.scss';
+
+.JobPostings-table {
+  width: 80vw;
+  max-width: 1200px;
+  background: $loblolly;
+  padding: 10px;
+  border: 1px solid darken($loblolly, 5%);
+}
+
+.JobPostings-tableData {
+  padding: 4px;
+}
+
+.JobPostings-tableHeader {
+  padding: 4px;
+  text-align: left;
+}

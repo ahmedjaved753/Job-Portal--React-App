@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import { JobPosting } from '../../types'
 import './JobPostings.scss'
@@ -10,6 +11,7 @@ interface Props {
 const postedDate = (postedAt: string) => postedAt.split('T')[0]
 
 export const JobPostings: React.FC<Props> = ({ jobPostings }) => {
+  
   return (
     <table className="JobPostings-table">
       <thead>
@@ -27,13 +29,15 @@ export const JobPostings: React.FC<Props> = ({ jobPostings }) => {
       <tbody>
         {jobPostings.map((posting: JobPosting) => (
           <tr key={posting.id}>
+            
             <td className="JobPostings-tableData">{postedDate(posting.posted_at)}</td>
-            <td className="JobPostings-tableData">{posting.title}</td>
+            <td className="JobPostings-tableData"><Link to={`/jobs/${posting.id}`}>{posting.title}</Link></td>
             <td className="JobPostings-tableData">{posting.job_poster.full_name}</td>
             <td className="JobPostings-tableData">{posting.category.name}</td>
             <td className="JobPostings-tableData">{posting.location.name}</td>
             <td className="JobPostings-tableData">{posting.status}</td>
             <td className="JobPostings-tableData"></td>
+            
           </tr>
         ))}
       </tbody>

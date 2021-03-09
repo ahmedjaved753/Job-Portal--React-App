@@ -7,4 +7,7 @@ console.log(baseURL)
 export const endpoints = {
   categories: `${baseURL}/v1/categories`,
   jobPostings: `${baseURL}/v1/job_postings`,
+  individualJobPosting: `${baseURL}/v1/job_postings/`,
+  locations: `${baseURL}/v1/locations`,
+  jobPosters: `${baseURL}/v1/job_posters`,
 }

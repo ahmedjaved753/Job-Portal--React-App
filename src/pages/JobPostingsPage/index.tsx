@@ -1,40 +1,56 @@
-import React from 'react'
-
+import React, {useState, useEffect} from 'react'
+import { Link } from 'react-router-dom'
 import { API } from '../../api'
 import { JobPosting } from '../../types'
 import { JobPostings } from './JobPostings'
 
-interface State {
-  jobPostings: JobPosting[]
-  loading: boolean
-}
+// export class JobPostingsPage extends React.Component<{}, State> {
+//   state = {
+//     jobPostings: [],
+//     loading: true,
+//   }
 
-export class JobPostingsPage extends React.Component<{}, State> {
-  state = {
-    jobPostings: [],
-    loading: true,
-  }
+//   componentDidMount() {
+//     API.jobPostings.loadAll().then(({ data }) => {
+//       this.setState({
+//         jobPostings: data,
+//         loading: false,
+//       })
+//     })
+//   }
 
-  componentDidMount() {
-    API.jobPostings.loadAll().then(({ data }) => {
-      this.setState({
-        jobPostings: data,
-        loading: false,
-      })
-    })
-  }
+//   render() {
+//     if (this.state.loading) {
+//       return null
+//     }
 
-  render() {
-    if (this.state.loading) {
-      return null
-    }
+//     return (
+//       <div>
+//         <h1>Job Postings</h1>
 
-    return (
-      <div>
+//         <JobPostings jobPostings={this.state.jobPostings} />
+//       </div>
+//     )
+//   }
+// }
+
+export function JobPostingsPage() {
+
+  const [jobPostings, setJobPostings] = useState<JobPosting[]>([]);
+  const [loading, setLoading] = useState(true);
+
+useEffect(() => {
+  API.jobPostings.loadAll().then(({ data }) => {
+    setJobPostings(data);
+    setLoading(false)
+    console.log(data);
+  })
+}, [])
+  return loading? null: (
+    <div>
         <h1>Job Postings</h1>
-
-        <JobPostings jobPostings={this.state.jobPostings} />
+        <Link to="/job_postings/new"><button>New Job</button></Link>
+        <JobPostings jobPostings={jobPostings} />
       </div>
-    )
-  }
+  )
 }
